@@ -1,0 +1,41 @@
+.user-column {
+  display: flex;
+  align-items: center;
+  img {
+    width: 50px;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+}
+
+.table-pointer {
+  tr {
+    cursor: pointer !important;
+  }
+}
+.pagination {
+  width: 30%;
+  margin-left: auto;
+  margin-bottom: 0 !important;
+}
+.has-search {
+  width: 30%;
+  .form-control {
+    padding-left: 2.375rem;
+  }
+  .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+  }
+}
+
+.custom-modal-body {
+  background-color: white;
+}

@@ -1,0 +1,13 @@
+.logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .logo-login{
+        width: 80px;
+        border-radius: 6px;
+    }
+    .logo-text{
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+}
