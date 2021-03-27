@@ -2,65 +2,73 @@
   <div class="auth-page">
     <b-container>
       <h5 class="auth-logo">
-        <AppLogo/>
+        <AppLogo />
       </h5>
-      <Widget class="widget-auth mx-auto" title="<h3 class='mt-0'>Admin Dashboard</h3>" customHeader>
+      <Widget
+        class="widget-auth mx-auto"
+        title="<h3 class='mt-0'>Admin Dashboard</h3>"
+        customHeader
+      >
         <p class="widget-auth-info">
-            Use your email to sign in.
+          Use your email to sign in.
         </p>
         <form class="mt" @submit.prevent="login">
-          <b-alert class="alert-sm" variant="danger" :show="!!errorMessage">
-            {{errorMessage}}
+          <b-alert
+            class="alert-sm"
+            variant="danger"
+            :show="tryLogin && !isLoginSuccess"
+          >
+            Tài khoản đăng nhập không hợp lệ, vui lòng sử dụng tài khoản khác!
           </b-alert>
-          <div class="form-group">
-            <input class="form-control no-border" ref="email" required type="email" name="email" placeholder="Email" />
-          </div>
-          <div class="form-group">
-            <input class="form-control no-border" ref="password" required type="password" name="password" placeholder="Password" />
-          </div>
-          <b-button type="submit" size="sm" class="auth-btn mb-3" variant="inverse">Login</b-button>
-          <p class="widget-auth-info">or sign in with</p>
+
           <div class="social-buttons">
-            <b-button variant="primary" class="social-button mb-2">
+            <b-button
+              variant="primary"
+              @click="login"
+              class="social-button mb-2"
+            >
               <i class="social-icon social-google"></i>
               <p class="social-text">GOOGLE</p>
             </b-button>
           </div>
         </form>
-        <router-link class="d-block text-center" to="login">Forget your password?</router-link>
       </Widget>
     </b-container>
     <footer class="auth-footer">
-      2021 &copy; Beauty At Home 
+      2021 &copy; Beauty At Home
     </footer>
   </div>
 </template>
 
 <script>
-
-import Widget from '@/components/Widget/Widget';
-import AppLogo from '../../components/Utils/AppLogo.vue';
+import Widget from "@/components/Widget/Widget";
+import AppLogo from "../../components/Utils/AppLogo.vue";
+import { mapActions, mapState } from "vuex";
 
 export default {
-  name: 'LoginPage',
+  name: "LoginPage",
   components: { Widget, AppLogo },
-  data() {
-    return {
-      errorMessage: null,
-    };
-  },
   methods: {
-    login() {
-      const email = this.$refs.email.value;
-      const password = this.$refs.password.value;
-
-      if (email.length !== 0 && password.length !== 0) {
-        window.localStorage.setItem('authenticated', true);
-        this.$router.push('admin/dashboard');
+    ...mapActions("auth", ["loginWithStore"]),
+    async login() {
+      await this.loginWithStore();
+      console.log("//////////////" + this.isLoginSuccess);
+      if (this.isLoginSuccess) {
+        this.$router.push("/admin");
+      } else {
+        this.tryLogin = true;
       }
     },
   },
-  created() {
+  data() {
+    return {
+      errorMessage: null,
+      tryLogin: false,
+    };
+  },
+  created() {},
+  computed: {
+    ...mapState("auth", ["isLoginSuccess"]),
   },
 };
 </script>

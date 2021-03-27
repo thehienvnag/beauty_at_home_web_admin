@@ -4,14 +4,29 @@
       <p>
         Thông tin đăng ký của thợ
       </p>
+      <b-form-select @change="handleFilter" style="width: 200px;">
+        <b-form-select-option :value="null">Tất cả</b-form-select-option>
+        <b-form-select-option value="ACTIVE"
+          >Đang hoạt động</b-form-select-option
+        >
+        <b-form-select-option value="NEW">Mới</b-form-select-option>
+        <b-form-select-option value="INACTIVE"
+          >Hủy</b-form-select-option
+        ></b-form-select
+      >
       <div class="form-group has-search">
         <span class="fa fa-search form-control-feedback"></span>
-        <input type="text" class="form-control" placeholder="Search" />
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search"
+          @keydown="handleSearch"
+        />
       </div>
     </div>
 
     <div class="table-responsive">
-      <b-table hover :fields="fields" :items="items" class="table-pointer">
+      <b-table hover :fields="fields" :items="listData" class="table-pointer">
         <template #cell(avatar)="data">
           <div class="user-column">
             <img :src="data.value" alt="" />
@@ -19,26 +34,34 @@
         </template>
         <template #cell(status)="data">
           <b-badge
-            v-if="data.value === 'Đợi'"
+            v-if="data.value === 'NEW'"
             variant="warning"
             style="width: 80px;"
-            >{{ data.value }}</b-badge
+            >MỚI</b-badge
           >
           <b-badge
-            v-if="data.value === 'Chấp nhận'"
+            v-if="data.value === 'ACTIVE'"
             variant="success"
             style="width: 80px;"
-            >{{ data.value }}</b-badge
+            >H.ĐỘNG</b-badge
           >
           <b-badge
-            v-if="data.value === 'Hủy'"
+            v-if="data.value === 'INACTIVE'"
             variant="danger"
             style="width: 80px;"
-            >{{ data.value }}</b-badge
+            >HỦY</b-badge
           >
         </template>
-        <template #cell(action)="">
-          <b-button v-b-modal.modal-detail squared variant="outline-primary">
+        <template #cell(address)="data">
+          <p style="width: 140px">{{ data.value }}</p>
+        </template>
+        <template #cell(action)="data">
+          <b-button
+            v-b-modal.modal-detail
+            squared
+            variant="outline-primary"
+            @click="() => changeCurrentWorker(data.value)"
+          >
             Xem chi tiết
           </b-button>
 
@@ -52,10 +75,16 @@
               ><b-button id="btnSetting" squared variant="info"
                 ><span class="fa fa-cog"></span></b-button
             ></template>
-            <b-dropdown-item variant="success" href="#"
+            <b-dropdown-item
+              variant="success"
+              @click="() => handleAccept(data.value)"
               >Chấp nhận</b-dropdown-item
             >
-            <b-dropdown-item variant="danger" href="#">Hủy </b-dropdown-item>
+            <b-dropdown-item
+              variant="danger"
+              @click="() => handleCancel(data.value)"
+              >Hủy
+            </b-dropdown-item>
           </b-dropdown>
         </template>
       </b-table>
@@ -69,17 +98,17 @@
       >
         <div class="row">
           <div class="col-md-8">
-            <EditProfile />
+            <EditProfile :currentWorker="currentWorker" />
           </div>
           <div class="col-md-4">
-            <ImageSection />
+            <ImageSection :currentWorker="currentWorker" />
           </div>
         </div>
       </b-modal>
       <b-pagination-nav
         class="pagination"
         v-model="currentPage"
-        :number-of-pages="pages"
+        :number-of-pages="this.listWorker.totalPage"
         base-url="/#/admin/artist-registration/page-"
       ></b-pagination-nav>
     </div>
@@ -93,8 +122,7 @@ import a3 from "@/assets/people/a3.jpg";
 import a4 from "@/assets/people/a4.jpg";
 import EditProfile from "./components/EditProfile";
 import ImageSection from "./components/ImageSection";
-
-
+import { mapState, mapActions } from "vuex";
 import Widget from "@/components/Widget/Widget";
 
 export default {
@@ -102,7 +130,7 @@ export default {
   components: {
     EditProfile,
     ImageSection,
-    Widget
+    Widget,
   },
   data() {
     return {
@@ -173,7 +201,71 @@ export default {
       ],
     };
   },
-  gotoDetail() {},
+  watch: {
+    async $route(to, from) {
+      const page = to.params.id.replace("page-", "");
+      await this.getWorkersAtPage(page);
+    },
+  },
+  async created() {
+    await this.getWorkersWithQuery("?getNewFirst=true");
+    console.log(this.listWorker);
+  },
+  computed: {
+    ...mapState("worker", ["listWorker", "currentWorker"]),
+    totalPage() {
+      if (!this.listWorker) {
+        return 1;
+      }
+      return this.listWorker.totalPage;
+    },
+    listData() {
+      if (this.listWorker && this.listWorker.content.length) {
+        return this.listWorker?.content.map((worker) => ({
+          Avatar: worker.gallery?.images[0]?.imageUrl,
+          Name: worker.displayName,
+          Phone: worker.phone,
+          Email: worker.email,
+          Status: worker.status,
+          Address: worker.addresses[0]?.location,
+          Action: worker.id,
+        }));
+      }
+      return [];
+    },
+  },
+  methods: {
+    ...mapActions("worker", [
+      "getListWorkerRegister",
+      "getWorkerById",
+      "updateWorkerStatus",
+      "searchWorker",
+      "filterWorker",
+      "getWorkersWithQuery",
+      "getWorkersAtPage",
+    ]),
+    changeCurrentWorker(workerId) {
+      this.getWorkerById(workerId);
+    },
+    handleAccept(workerId) {
+      this.updateWorkerStatus([workerId, "ACTIVE"]);
+    },
+    handleCancel(workerId) {
+      this.updateWorkerStatus([workerId, "INACTIVE"]);
+    },
+    handleSearch(e) {
+      if (e.keyCode == 13) {
+        this.getWorkersWithQuery("?role=WORKER&displayName=" + e.target.value);
+      }
+    },
+    handleFilter(e) {
+      if (!e) {
+        this.getWorkersWithQuery("?getNewFirst=true");
+      } else {
+        this.getWorkersWithQuery("?role=WORKER&status=" + e);
+      }
+    },
+  },
 };
 </script>
 

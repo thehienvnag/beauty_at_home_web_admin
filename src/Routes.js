@@ -3,6 +3,8 @@ import Router from 'vue-router';
 
 import Layout from '@/components/Layout/Layout';
 
+import ArtistList from '@/pages/ArtistList/ArtistList';
+
 import Login from '@/pages/Login/Login';
 
 import Register from '@/pages/Register/Register';
@@ -79,6 +81,11 @@ export default new Router({
           path: 'typography',
           name: 'TypographyPage',
           component: TypographyPage,
+        },
+        {
+          path: 'artist-list/:id?',
+          name: 'Artist List',
+          component: ArtistList 
         },
         {
           path: 'notifications',

@@ -4,14 +4,18 @@
     <!---->
     <div class="card-body">
       <div class="author text-center">
-        ><img
-          src="@/assets/people/Trang.png"
-          alt="..."
-          class="avatar border-gray"
-        />
+        <img :src="avatar" alt="..." class="avatar border-gray" />
+        <b-form-file
+          v-model="file"
+          @input="handleImage"
+          ref="file-input"
+          class="mt-5 fileButton btn btn-light"
+          plain
+        ></b-form-file>
+
         <h4 class="title">
-          Cao Quỳnh Trang<br />
-          <small>@trangcao</small>
+          {{ authState.displayName }}<br />
+          <small>@{{ authState.email }}</small>
         </h4>
       </div>
       <p class="description text-center">
@@ -19,24 +23,37 @@
       </p>
     </div>
     <div class="card-footer">
-      <div class="text-center">
-        <button href="#" class="btn btn-simple">
-          <i class="fa fa-facebook-square"></i>
-        </button>
-        <button href="#" class="btn btn-simple">
-          <i class="fa fa-twitter"></i>
-        </button>
-        <button href="#" class="btn btn-simple">
-          <i class="fa fa-google-plus-square"></i>
-        </button>
-      </div>
+      <div class="text-center"></div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+
 export default {
   name: "ImageSection",
+  computed: {
+    ...mapState("auth", ["authState"]),
+    avatar() {
+      if (this.file != null) {
+        return URL.createObjectURL(this.file);
+      }
+      return this.authState.gallery?.images[0]?.imageUrl;
+    },
+  },
+  data: () => {
+    return {
+      file: null,
+    };
+  },
+  methods: {
+    ...mapActions("auth", ["changeProfilePart"]),
+    handleImage(file) {
+      this.file = file;
+      this.changeProfilePart({ file: file });
+    },
+  },
 };
 </script>
 
@@ -59,6 +76,12 @@ export default {
   }
   .title {
     margin-top: 70px;
+  }
+  .fileButton {
+    position: absolute;
+    top: 210px;
+    left: 95px;
+    width: 240px;
   }
 }
 </style>

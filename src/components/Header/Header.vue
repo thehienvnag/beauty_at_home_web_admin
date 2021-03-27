@@ -27,13 +27,9 @@
       >
         <template slot="button-content">
           <span class="avatar rounded-circle thumb-sm float-left mr-2">
-            <img
-              class="rounded-circle"
-              src="../../assets/people/Trang.png"
-              alt="..."
-            />
+            <img class="img" :src="avatar" alt="..." />
           </span>
-          <span class="px-2">Cao Quỳnh Trang</span>
+          <span class="px-2">{{ authState.displayName }}</span>
           <span class="ml-1 mr-2 circle text-white fw-bold avatar-badge"
             >9</span
           >
@@ -55,7 +51,7 @@
           Profile</b-dropdown-item-button
         >
         <b-dropdown-divider />
-        <b-dropdown-item-button @click="logout">
+        <b-dropdown-item-button @click="logoutView">
           <i class="fi flaticon-power-1 px-3 mr-3" /> Log Out
         </b-dropdown-item-button>
       </b-nav-item-dropdown>
@@ -72,6 +68,10 @@ export default {
   components: { Notifications },
   computed: {
     ...mapState("layout", ["sidebarClose", "sidebarStatic"]),
+    ...mapState("auth", ["authState"]),
+    avatar() {
+      return this.authState?.gallery?.images[0]?.imageUrl;
+    },
   },
   methods: {
     ...mapActions("layout", [
@@ -79,6 +79,7 @@ export default {
       "switchSidebar",
       "changeSidebarActive",
     ]),
+    ...mapActions("auth", ["logout"]),
     switchSidebarMethod() {
       if (!this.sidebarClose) {
         this.switchSidebar(true);
@@ -101,8 +102,8 @@ export default {
         this.changeSidebarActive(paths.join("/"));
       }
     },
-    logout() {
-      window.localStorage.setItem("authenticated", false);
+    async logoutView() {
+      await this.logout();
       this.$router.push("/admin-login");
     },
     goToProfile() {

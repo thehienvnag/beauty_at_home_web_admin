@@ -1,4 +1,4 @@
-@import '../../styles/app';
+@import "../../styles/app";
 
 .app-header.navbar {
   height: $navbar-height;
@@ -16,7 +16,8 @@
     padding: 0;
 
     .nav-item {
-      .nav-link, .nav-link > a {
+      .nav-link,
+      .nav-link > a {
         display: flex;
         align-items: center;
         height: 100%;
@@ -44,7 +45,8 @@
   &.header-dark {
     .nav {
       .nav-item {
-        .nav-link, .nav-link > a {
+        .nav-link,
+        .nav-link > a {
           color: $white;
 
           @include hover {
@@ -84,9 +86,9 @@
   .form-group {
     width: 300px;
     input {
-      background-color: #F9FAFE;
+      background-color: #f9fafe;
       &::placeholder {
-        color: #4A5056;
+        color: #4a5056;
         font-weight: $font-weight-normal;
       }
     }
@@ -96,10 +98,9 @@
 
     .input-group-text {
       border: none;
-      background-color: #F9FAFE!important;
+      background-color: #f9fafe !important;
       transition: background-color ease-in-out 0.15s;
     }
-
   }
 
   .avatar {
@@ -112,10 +113,13 @@
     background: #ffc247;
     font-weight: 600;
     font-size: 18px;
+    .img {
+      height: 50px;
+    }
   }
 
   .avatar-badge {
-    background-color: #0D2B47;
+    background-color: #0d2b47;
   }
 
   .navbarBrand {
@@ -136,6 +140,9 @@
     }
   }
 
+  .rounded-circle {
+    width: 40px;
+  }
   .notificationsMenu {
     .dropdown-menu {
       left: auto !important;
@@ -160,5 +167,3 @@
     }
   }
 }
-
-

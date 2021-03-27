@@ -16,6 +16,7 @@ import Badge from "./components/Badge";
 import BaseButton from "./components/BaseButton";
 import Card from "./components/Card";
 import Icon from "./components/Icon";
+import firebase from "firebase/app";
 Vue.component(Badge.name, Badge);
 Vue.component(BaseButton.name, BaseButton);
 Vue.component(Card.name, Card);
@@ -29,6 +30,18 @@ Vue.mixin(layoutMixin);
 Vue.use(Toasted, { duration: 10000 });
 
 Vue.config.productionTip = false;
+
+const configOptions = {
+  apiKey: "AIzaSyDJr2okbjf74Yeuaf7lmHeEgqyVIcwb2Fc",
+  authDomain: "application-test-4750a.firebaseapp.com",
+  databaseURL: "https://application-test-4750a.firebaseio.com",
+  projectId: "application-test-4750a",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+};
+
+firebase.initializeApp(configOptions);
 
 /* eslint-disable no-new */
 new Vue({

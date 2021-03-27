@@ -6,9 +6,6 @@
       <div class="author text-center">
         <vue-upload-multiple-image
           style="margin-left: 60px;"
-          @upload-success="uploadImageSuccess"
-          @before-remove="beforeRemove"
-          @edit-image="editImage"
           :data-images="images"
           :multiple="false"
         ></vue-upload-multiple-image>
@@ -17,7 +14,7 @@
           alt="..."
           class="avatar border-gray"
         /> -->
-        <h4 class="title">Cao Quỳnh Trang<br /></h4>
+        <h4 class="title">{{ currentWorker.displayName }}<br /></h4>
         <small>Ảnh cá nhân</small>
       </div>
     </div>
@@ -27,20 +24,28 @@
 
 <script>
 import VueUploadMultipleImage from "vue-upload-multiple-image";
+import { mapState } from "vuex";
+
 export default {
   name: "ImageSection",
   data() {
-    return {
-      images: [
-        {
-          path:
-            "https://shopee.vn/blog/wp-content/uploads/2019/01/c%C3%A1ch-trang-%C4%91i%E1%BB%83m-cho-d%C3%A2n-c%C3%B4ng-s%E1%BB%9F-e1546570756464.jpg",
-          default: 1,
-          highlight: 1,
-          caption: "caption to display. receive", // Optional
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    ...mapState("worker", ["currentWorker"]),
+    images() {
+      if (this.currentWorker && this.currentWorker.gallery) {
+        return this.currentWorker?.gallery?.images
+          ?.filter((img) => img.description === "customer-avatar")
+          .map((img, i) => {
+            const isDefault = i === 0;
+            return {
+              path: img.imageUrl,
+              default: isDefault,
+            };
+          });
+      }
+    },
   },
   components: {
     VueUploadMultipleImage,

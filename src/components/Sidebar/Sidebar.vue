@@ -32,7 +32,7 @@
             :activeItem="activeItem"
             header="Danh sách thợ"
             link="/admin/artist-list"
-            glyphIcon="glyphicon glyphicon-list"
+            glyphIcon="fa fa-users"
             index="artistRegistration"
             isHeader
         />
