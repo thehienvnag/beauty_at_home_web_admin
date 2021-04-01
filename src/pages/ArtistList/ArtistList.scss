@@ -1,0 +1,82 @@
+.user-column {
+  display: flex;
+  align-items: center;
+  img {
+    width: 70px;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
+}
+
+.table-pointer {
+  tr {
+    cursor: pointer !important;
+  }
+}
+.pagination {
+  width: 30%;
+  margin-left: auto;
+  margin-bottom: 0 !important;
+}
+.has-search {
+  width: 30%;
+  .form-control {
+    padding-left: 2.375rem;
+  }
+  .form-control-feedback {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    width: 2.375rem;
+    height: 2.375rem;
+    line-height: 2.375rem;
+    text-align: center;
+    pointer-events: none;
+    color: #aaa;
+  }
+}
+.chip-filter {
+  // border: 0.3px solid rgb(192, 190, 190);
+  width: fit-content;
+  // border-radius: 4px;
+  // padding: 4px;
+  // padding-left: 7px;
+  // padding-bottom: 5px;
+  i {
+    font-size: 18px;
+    margin-right: 20px;
+    padding-top: 5px;
+  }
+  .badge {
+    cursor: pointer;
+    margin-right: 15px;
+  }
+}
+
+.custom-modal-body {
+  background-color: white;
+}
+
+.rating-star {
+  display: flex;
+  align-items: center;
+  i {
+    font-size: 16px;
+    margin-right: 5px;
+    color: #ef8b1d;
+  }
+}
+.bad-feedbacks {
+  .fa-circle {
+    font-size: 6px;
+    color: #f5365c;
+  }
+  .fa-star {
+    font-size: 13px;
+    color: #ef8b1d;
+  }
+}
+
+.select-status {
+  width: 300px;
+}

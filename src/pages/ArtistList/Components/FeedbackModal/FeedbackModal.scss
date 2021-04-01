@@ -1,0 +1,48 @@
+.customer {
+  i {
+    color: gray;
+  }
+  .avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  .customer-summary{
+    width: 315px;
+  }
+  .feedback-content {
+    width: 200px;
+  }
+  .feedback {
+    img {
+      height: 45px;
+      border-radius: 4px;
+      margin-right: 5px;
+      margin-bottom: 3px;
+    }
+  }
+}
+
+.date-picker {
+  position: absolute;
+  top: 55px;
+  left: 0;
+}
+
+.chip-filter {
+  // border: 0.3px solid rgb(192, 190, 190);
+  width: fit-content;
+  // border-radius: 4px;
+  // padding: 4px;
+  // padding-left: 7px;
+  // padding-bottom: 5px;
+  i {
+    font-size: 18px;
+    margin-right: 20px;
+    padding-top: 5px;
+  }
+  .badge {
+    cursor: pointer;
+    margin-right: 15px;
+  }
+}
