@@ -29,17 +29,12 @@
 
 <script>
 import Vue from "vue";
-
-import NotifictionsList from "./NotificationsDemo/NotificationsList";
 import NewNotifictionsList from "./NotificationsDemo/NewNotificationsList";
-import Messages from "./NotificationsDemo/Messages";
 
 export default {
   name: "Notification",
   components: {
-    NotifictionsList,
     NewNotifictionsList,
-    Messages,
   },
   data() {
     return {

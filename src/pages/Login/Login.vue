@@ -52,7 +52,6 @@ export default {
     ...mapActions("auth", ["loginWithStore"]),
     async login() {
       await this.loginWithStore();
-      console.log("//////////////" + this.isLoginSuccess);
       if (this.isLoginSuccess) {
         this.$router.push("/admin");
       } else {

@@ -116,10 +116,6 @@
 </template>
 
 <script>
-import a1 from "@/assets/people/a1.jpg";
-import a2 from "@/assets/people/a2.jpg";
-import a3 from "@/assets/people/a3.jpg";
-import a4 from "@/assets/people/a4.jpg";
 import EditProfile from "./components/EditProfile";
 import ImageSection from "./components/ImageSection";
 import { mapState, mapActions } from "vuex";
@@ -165,40 +161,6 @@ export default {
           label: "Hành động",
         },
       ],
-      items: [
-        {
-          Avatar: a1,
-          Phone: "0918 883 441",
-          Name: "Quỳnh Như",
-          Email: "nhunnqse@gmail.com",
-          Status: "Đợi",
-          Address: "765 Hồng Bàng, phường 1, quận 11",
-        },
-        {
-          Avatar: a2,
-          Phone: "0918 883 441",
-          Name: "Đức Thịnh",
-          Email: "thinhse@gmail.com",
-          Status: "Hủy",
-          Address: "32 Võ Văn Hát, quận 9",
-        },
-        {
-          Avatar: a3,
-          Phone: "0918 883 441",
-          Name: "Đăng Khoa",
-          Email: "khoase@gmail.com",
-          Status: "Chấp nhận",
-          Address: "72/4/6 Làng Tăng Phú, quận 9",
-        },
-        {
-          Avatar: a4,
-          Phone: "0918 883 441",
-          Name: "Minh Khoa",
-          Email: "mkhoase7@gmail.com",
-          Status: "Đợi",
-          Address: "6 đường số 9 Nguyễn Văn Tăng",
-        },
-      ],
     };
   },
   watch: {
@@ -209,7 +171,6 @@ export default {
   },
   async created() {
     await this.getWorkersWithQuery("?getNewFirst=true");
-    console.log(this.listWorker);
   },
   computed: {
     ...mapState("worker", ["listWorker", "currentWorker"]),

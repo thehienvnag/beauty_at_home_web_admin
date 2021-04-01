@@ -5,8 +5,8 @@
         <i class="fa fa-check text-success fa-lg" />
       </span>
       <p class="m-0 overflow-hidden">
-        2 issues require your approval.
-        &nbsp;<a href="#">The Search Project</a> completed on time!
+        2 issues require your approval. &nbsp;<a href="#">The Search Project</a>
+        completed on time!
         <time class="help-block m-0">
           just now
         </time>
@@ -14,7 +14,7 @@
     </b-list-group-item>
     <b-list-group-item class="listGroupItem bg-attention">
       <span class="notificationIcon thumb-sm">
-        <img class="rounded-circle" src="../../../assets/people/a4.jpg" alt="..." />
+        <img class="rounded-circle" src="" alt="..." />
       </span>
       <p class="m-0 overflow-hidden">
         <a href="#">Jeniffer Willington</a>has just endorsed you with 50 points!
@@ -25,11 +25,11 @@
     </b-list-group-item>
     <b-list-group-item class="listGroupItem">
       <span class="notificationIcon thumb-sm">
-        <img class="rounded-circle" src="../../../assets/people/a3.jpg" alt="..." />
+        <img class="rounded-circle" src="" alt="..." />
       </span>
       <p class="m-0 overflow-hidden">
-        1 new user just signed up! Check out
-        &nbsp;<a href="#">Monica Smith</a>'s account.
+        1 new user just signed up! Check out &nbsp;<a href="#">Monica Smith</a
+        >'s account.
         <time class="help-block m-0">
           2 mins ago
         </time>
@@ -59,11 +59,10 @@
     </b-list-group-item>
     <b-list-group-item class="listGroupItem">
       <span class="notificationIcon thumb-sm">
-        <img class="rounded-circle" src="../../../assets/people/a5.jpg" alt="..." />
+        <img class="rounded-circle" src="" alt="..." />
       </span>
       <p class="m-0 overflow-hidden">
-        User <a href="#">Jeff</a> registered
-        &nbsp;&nbsp;
+        User <a href="#">Jeff</a> registered &nbsp;&nbsp;
         <b-button size="xs" variant="success" class="mr-1">Allow</b-button>
         <b-button size="xs" variant="danger">Deny</b-button>
         <time class="help-block m-0">
@@ -76,8 +75,8 @@
         <i class="fa fa-shield fa-lg" />
       </span>
       <p class="m-0 overflow-hidden">
-        Instructions for changing your Envato Account password. Please
-        check your account <a href="#">security page</a>.
+        Instructions for changing your Envato Account password. Please check
+        your account <a href="#">security page</a>.
         <time class="help-block m-0">
           12:18 AM
         </time>
@@ -114,7 +113,7 @@
 
 <script>
 export default {
-  name: 'NewNotificationsList',
+  name: "NewNotificationsList",
 };
 </script>
 

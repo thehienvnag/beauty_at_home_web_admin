@@ -145,7 +145,7 @@ export default {
       done();
       this.handleImage(["imagesCertificates", fileList]);
     },
-    handleSelect(value, id) {
+    handleSelect(value) {
       this.handleCombobox(["serviceTypes", value]);
     },
     handleAddress(value) {
@@ -171,7 +171,7 @@ export default {
   data() {
     return {
       addressField: null,
-      // selected: [],
+      selected: [],
       // options: [
       //   { name: "Makeup - Trang điểm", language: "JavaScript" },
       //   { name: "Waxing", language: "Ruby" },

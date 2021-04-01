@@ -1,106 +1,73 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import Vue from "vue";
+import Router from "vue-router";
 
-import Layout from '@/components/Layout/Layout';
+import Layout from "@/components/Layout/Layout";
 
-import ArtistList from '@/pages/ArtistList/ArtistList';
+import ArtistList from "@/pages/ArtistList/ArtistList";
 
-import Login from '@/pages/Login/Login';
+import Login from "@/pages/Login/Login";
 
-import Register from '@/pages/Register/Register';
+import Register from "@/pages/Register/Register";
 
-import Profile from '@/pages/Profile/Profile';
+import Profile from "@/pages/Profile/Profile";
 
-import Landing from '@/pages/Landing/Landing';
+import Landing from "@/pages/Landing/Landing";
 
+import BeautyArtistList from "@/pages/ArtistRegistration/BeautyArtistList";
 
-import BeautyArtistList from "@/pages/ArtistRegistration/BeautyArtistList"
-
-
-import ErrorPage from '@/pages/Error/Error';
-// Core
-import TypographyPage from '@/pages/Typography/Typography';
-
-// Tables
-import TablesBasicPage from '@/pages/Tables/Basic';
+import ErrorPage from "@/pages/Error/Error";
 
 // Main
-import AnalyticsPage from '@/pages/Dashboard/Dashboard';
-
-// Charts
-import ChartsPage from '@/pages/Charts/Charts';
-
-import NotificationsPage from '@/pages/Notifications/Notifications';
-
+import AnalyticsPage from "@/pages/Dashboard/Dashboard";
 
 Vue.use(Router);
 
 export default new Router({
   routes: [
     {
-      path: '/',
-      name: 'Landing',
-      component: Landing
+      path: "/",
+      name: "Landing",
+      component: Landing,
     },
     {
-      path: '/admin-login',
-      name: 'Login',
+      path: "/admin-login",
+      name: "Login",
       component: Login,
     },
     {
-      path: '/register',
-      name: 'Register',
+      path: "/register",
+      name: "Register",
       component: Register,
     },
     {
-      path: '/error',
-      name: 'Error',
+      path: "/error",
+      name: "Error",
       component: ErrorPage,
     },
     {
-      path: '/admin',
-      name: 'Layout',
+      path: "/admin",
+      name: "Layout",
       component: Layout,
       children: [
         {
-          path: 'dashboard',
-          name: 'AnalyticsPage',
+          path: "dashboard",
+          name: "AnalyticsPage",
           component: AnalyticsPage,
         },
         {
-          path: 'my-profile',
+          path: "my-profile",
           name: "Profile",
-          component: Profile
+          component: Profile,
         },
         {
-          path: 'artist-registration/:id?',
+          path: "artist-registration/:id?",
           name: "BeautyArtist",
-          component: BeautyArtistList
+          component: BeautyArtistList,
         },
         {
-          path: 'typography',
-          name: 'TypographyPage',
-          component: TypographyPage,
-        },
-        {
-          path: 'artist-list/:id?',
-          name: 'Artist List',
-          component: ArtistList 
-        },
-        {
-          path: 'notifications',
-          name: 'NotificationsPage',
-          component: NotificationsPage,
-        },
-        {
-          path: 'components/charts',
-          name: 'ChartsPage',
-          component: ChartsPage,
-        },
-        {
-          path: 'tables',
-          name: 'TablesBasicPage',
-          component: TablesBasicPage,
+          path: "artist-list/:id?",
+          name: "Artist List",
+          component: ArtistList,
         },
       ],
     },

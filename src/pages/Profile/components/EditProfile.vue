@@ -115,7 +115,6 @@ export default {
       this.changeProfilePart({ [name]: value });
     },
     handleUpdate() {
-      console.log("update");
       this.changeProfile();
     },
   },

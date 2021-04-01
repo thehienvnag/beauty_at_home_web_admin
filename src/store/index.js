@@ -7,6 +7,7 @@ import auth from "./auth";
 import worker from "./worker";
 import serviceTypes from "./serviceTypes";
 import feedback from "./feedback";
+import booking from "./booking";
 
 Vue.use(Vuex);
 
@@ -18,5 +19,6 @@ export default new Vuex.Store({
     worker,
     serviceTypes,
     feedback,
+    booking,
   },
 });

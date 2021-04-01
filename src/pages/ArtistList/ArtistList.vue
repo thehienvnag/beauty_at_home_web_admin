@@ -66,10 +66,13 @@
               ><b-button id="btnSetting" squared variant="info"
                 ><span class="fa fa-cog"></span></b-button
             ></template>
-            <b-dropdown-item href="#"
+            <b-dropdown-item href="#" @click="() => handleAccept(data.value)"
               >Cho phép hoạt động trở lại</b-dropdown-item
             >
-            <b-dropdown-item href="#" variant="danger"
+            <b-dropdown-item
+              href="#"
+              @click="() => handleCancel(data.value)"
+              variant="danger"
               >Tạm ngưng hoạt động</b-dropdown-item
             >
           </b-dropdown>
@@ -220,7 +223,12 @@ export default {
     this.getWorkersWithQuery("?role=WORKER&withRateScore=true");
   },
   methods: {
-    ...mapActions("worker", ["getWorkersWithQuery", "getWorkersAtPage"]),
+    ...mapActions("booking", ["getBookingById"]),
+    ...mapActions("worker", [
+      "getWorkersWithQuery",
+      "getWorkersAtPage",
+      "updateWorkerStatus",
+    ]),
     ...mapActions("feedback", ["getWorkerFeedback"]),
     filter(index) {
       if (this.selectedFilterIndex === index) {
@@ -229,7 +237,14 @@ export default {
         this.selectedFilterIndex = index;
       }
     },
-    navigateDetail() {
+    handleAccept(workerId) {
+      this.updateWorkerStatus([workerId, "ACTIVE"]);
+    },
+    handleCancel(workerId) {
+      this.updateWorkerStatus([workerId, "INACTIVE"]);
+    },
+    navigateDetail(bookingId) {
+      this.getBookingById(bookingId);
       this.isInDetail = !this.isInDetail;
     },
     handleSearch(e) {

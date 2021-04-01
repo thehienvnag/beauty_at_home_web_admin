@@ -169,7 +169,6 @@ export default {
       return [];
     },
     address() {
-      console.log(this.currentWorker);
       if (this.currentWorker != null) {
         return this.currentWorker?.addresses[0]?.location;
       }
@@ -192,7 +191,6 @@ export default {
   },
   watch: {
     currentWorker() {
-      console.log(this.currentWorker);
       this.isLoading = false;
     },
   },

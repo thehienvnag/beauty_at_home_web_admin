@@ -40,9 +40,6 @@
           Thông tin của bạn đã được gửi đến ADMIN để xác nhận đăng ký,
         </h6>
       </b-alert>
-      <p>
-        Vui lòng kiểm tra tài khoản Gmail đã đăng ký để bắt đầu sử dụng
-      </p>
     </div>
 
     <div v-show="errors && errors.length">
@@ -97,7 +94,6 @@ export default {
     },
     async handleRegister() {
       this.errors = [];
-      console.log(this.formData);
 
       const displayName = this.formData?.displayName;
       const phone = this.formData?.phone;

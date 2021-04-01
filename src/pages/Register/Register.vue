@@ -42,8 +42,10 @@ export default {
     EditInfo,
     ImagePick,
   },
-  data: {
-    isTrying: false,
+  data() {
+    return {
+      isTrying: false,
+    };
   },
   methods: {
     ...mapActions("auth", ["loginWithStore"]),
