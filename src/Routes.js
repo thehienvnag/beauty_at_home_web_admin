@@ -23,6 +23,7 @@ import AnalyticsPage from "@/pages/Dashboard/Dashboard";
 Vue.use(Router);
 
 export default new Router({
+  mode: "history",
   routes: [
     {
       path: "/",

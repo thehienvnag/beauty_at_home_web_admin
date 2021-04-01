@@ -164,7 +164,7 @@ export default {
     };
   },
   watch: {
-    async $route(to, from) {
+    async $route(to) {
       const page = to.params.id.replace("page-", "");
       await this.getWorkersAtPage(page);
     },
